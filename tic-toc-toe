@@ -1,0 +1,12 @@
+board = [' ' for _ in range(9)]
+winner = lambda: [(board[i], board[i+1], board[i+2]) for i in range(0, 9, 3)] + \
+                 [(board[i], board[i+3], board[i+6]) for i in range(3)] + \
+                 [(board[0], board[4], board[8]), (board[2], board[4], board[6])]
+player = 'X'
+while ' ' in board:
+    print('\n'.join([' '.join(board[i:i+3]) for i in range(0, 9, 3)]))
+    i = int(input(f'Player {player}, enter your move (0-8): '))
+    if board[i] != ' ': continue
+    board[i], player = player, 'O' if player == 'X' else 'X'
+    if ('X', 'X', 'X') in winner(): print('X wins!')
+    elif ('O', 'O', 'O') in winner(): print('O wins!')
